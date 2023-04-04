@@ -1,16 +1,5 @@
 import React, { Component } from "react";
 
-const heading = {
-  color: "red",
-  backgroundColor: "blue",
-};
-
-const section = {
-  backgroundColor: "grey",
-  borderTop: "solid 2px black",
-  borderBottom: "solid 2px black",
-};
-
 class General extends Component {
   constructor(props) {
     super();
@@ -27,8 +16,6 @@ class General extends Component {
     this.setState({
       name: event.target.value,
     });
-    console.log(event.target.value);
-    console.log(this);
   };
 
   handleEmailChange = (event) => {
@@ -50,58 +37,28 @@ class General extends Component {
   };
 
   handleSubmit = (event) => {
-    // this.setState(
-    //   {
-    //     editMode: false,
-    //   },
-    //   () => {
-    //     console.log(this.state.editMode, "sjdbhsj");
-    //   }
-    // );
-    // console.log(this.state.editMode);
-    alert(
-      `${this.state.name} ${this.state.email} ${this.state.phone} ${this.state.editMode}`
-    );
     event.preventDefault();
   };
 
   changeMode = () => {
-    this.setState(
-      {
-        editMode: false,
-      },
-      () => {
-        console.log(this.state.editMode, "sjdbhsj");
-      }
-    );
-    console.log(this.state.editMode);
-    alert(
-      `${this.state.name} ${this.state.email} ${this.state.phone} ${this.state.editMode}`
-    );
+    this.setState({
+      editMode: false,
+    });
   };
 
   startEdit = () => {
-    this.setState(
-      {
-        editMode: true,
-      },
-      () => {
-        console.log(this.state.editMode, "sjdbhsj");
-      }
-    );
-    console.log(this.state.editMode);
-    alert(
-      `${this.state.name} ${this.state.email} ${this.state.phone} ${this.state.editMode}`
-    );
+    this.setState({
+      editMode: true,
+    });
   };
 
   render() {
     if (this.state.editMode) {
       return (
         <div className="General">
-          <h1 style={heading}> {this.state.name}</h1>
-          <h2>{this.state.position}</h2>
-          <form onSubmit={this.handleSubmit}>
+          <h2> {this.state.name}</h2>
+          <h3>{this.state.position}</h3>
+          <form onSubmit={this.handleSubmit} id="edit-mode">
             <div>
               <label htmlFor="nameInput">Full name: </label>
               <input
@@ -141,9 +98,6 @@ class General extends Component {
                 id="phoneInput"
               />
             </div>
-            {/* <button type="button" onClick={this.startEdit}>
-              Edit
-            </button> */}
             <button type="submit" onClick={this.changeMode}>
               Submit
             </button>
@@ -153,17 +107,9 @@ class General extends Component {
     } else {
       return (
         <div className="General">
-          <h1 style={heading}>{this.state.name}</h1>
-          <h2>{this.state.position}</h2>
-          <div style={section}>
-            <div>
-              <p>Full name: {this.state.name}</p>
-            </div>
-
-            <div>
-              <p>Desired position: {this.state.position}</p>
-            </div>
-
+          <h2>{this.state.name}</h2>
+          <h3>{this.state.position}</h3>
+          <div className="general-info">
             <div>
               <p>E-mail: {this.state.email}</p>
             </div>
@@ -174,9 +120,6 @@ class General extends Component {
             <button type="button" onClick={this.startEdit}>
               Edit
             </button>
-            {/* <button type="submit" onClick={this.changeMode}>
-              Submit
-            </button> */}
           </div>
         </div>
       );

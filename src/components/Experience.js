@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import uniqid from "uniqid";
 import Job from "./Job";
 
-const section = {
-  backgroundColor: "grey",
-  borderBottom: "solid 2px black",
-};
-
 export class Experience extends Component {
   constructor(props) {
     super();
@@ -22,9 +17,9 @@ export class Experience extends Component {
       },
       jobs: [
         {
-          name: "Apple",
-          position: "web-developer",
-          tasks: "write code",
+          name: "",
+          position: "",
+          tasks: "",
           startDate: "",
           endDate: "",
           id: uniqid(),
@@ -114,7 +109,6 @@ export class Experience extends Component {
     this.setState({
       jobs: j,
     });
-    alert("change mode");
   };
 
   startEdit = (id) => {
@@ -128,7 +122,6 @@ export class Experience extends Component {
     this.setState({
       jobs: j,
     });
-    alert("change mode");
   };
 
   deleteJob = (id) => {
@@ -156,8 +149,10 @@ export class Experience extends Component {
   render() {
     return (
       <div className="Experience">
-        <h3 style={section}>Experience</h3>
-        <button onClick={this.addJob}>Add</button>
+        <div className="section-header">
+          <h3>Experience</h3>
+          <button onClick={this.addJob}>Add</button>
+        </div>
         <Job
           jobs={this.state.jobs}
           name={this.handleNameChange}

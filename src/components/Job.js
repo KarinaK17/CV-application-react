@@ -1,10 +1,6 @@
 import React from "react";
 
 class Job extends React.Component {
-  constructor(props) {
-    super();
-  }
-
   render() {
     const { jobs } = this.props;
     return (
@@ -12,7 +8,7 @@ class Job extends React.Component {
         {jobs.map((job) => {
           if (job.editMode) {
             return (
-              <li key={job.id}>
+              <li key={job.id} id="edit-mode">
                 <form onSubmit={this.props.submit}>
                   <div>
                     <label htmlFor="nameInput">Name of the company: </label>
@@ -48,17 +44,17 @@ class Job extends React.Component {
                     <input
                       onChange={(e) => this.props.start(e, job.id)}
                       value={job.startDate}
-                      type="date"
+                      type="month"
                       id="startInput"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="endInput">Finish date:</label>
+                    <label htmlFor="endInput">End date:</label>
                     <input
                       onChange={(e) => this.props.end(e, job.id)}
                       value={job.endDate}
-                      type="date"
+                      type="month"
                       id="endInput"
                     />
                   </div>
@@ -76,19 +72,33 @@ class Job extends React.Component {
               <li key={job.id}>
                 <div>
                   <div>
-                    <p>Name of the institution: {job.name}</p>
+                    <p>
+                      Name of the institution: <b>{job.name}</b>
+                    </p>
                   </div>
 
                   <div>
-                    <p>Position: {job.position}</p>
+                    <p>
+                      Position: <b>{job.position}</b>
+                    </p>
                   </div>
 
                   <div>
-                    <p>Start date: {job.startDate}</p>
+                    <p>
+                      Tasks: <b>{job.tasks}</b>
+                    </p>
                   </div>
 
                   <div>
-                    <p>End date: {job.endDate}</p>
+                    <p>
+                      Start date: <b>{job.startDate}</b>
+                    </p>
+                  </div>
+
+                  <div>
+                    <p>
+                      End date: <b>{job.endDate}</b>
+                    </p>
                   </div>
                   <button type="button" onClick={() => this.props.edit(job.id)}>
                     Edit

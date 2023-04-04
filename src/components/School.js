@@ -1,10 +1,6 @@
 import React from "react";
 
 class School extends React.Component {
-  constructor(props) {
-    super();
-  }
-
   render() {
     const { schools } = this.props;
     return (
@@ -12,7 +8,7 @@ class School extends React.Component {
         {schools.map((school) => {
           if (school.editMode) {
             return (
-              <li key={school.id}>
+              <li key={school.id} id="edit-mode">
                 <form onSubmit={this.props.submit}>
                   <div>
                     <label htmlFor="nameInput">Name of the institution: </label>
@@ -39,7 +35,7 @@ class School extends React.Component {
                     <input
                       onChange={(e) => this.props.start(e, school.id)}
                       value={school.startDate}
-                      type="date"
+                      type="month"
                       id="startInput"
                     />
                   </div>
@@ -49,7 +45,7 @@ class School extends React.Component {
                     <input
                       onChange={(e) => this.props.end(e, school.id)}
                       value={school.endDate}
-                      type="date"
+                      type="month"
                       id="endInput"
                     />
                   </div>
@@ -67,19 +63,27 @@ class School extends React.Component {
               <li key={school.id}>
                 <div>
                   <div>
-                    <p>Name of the institution: {school.name}</p>
+                    <p>
+                      Name of the institution: <b>{school.name}</b>
+                    </p>
                   </div>
 
                   <div>
-                    <p>Degree: {school.degree}</p>
+                    <p>
+                      Degree: <b>{school.degree}</b>
+                    </p>
                   </div>
 
                   <div>
-                    <p>Start date: {school.startDate}</p>
+                    <p>
+                      Start date: <b>{school.startDate}</b>
+                    </p>
                   </div>
 
                   <div>
-                    <p>End date: {school.endDate}</p>
+                    <p>
+                      End date: <b>{school.endDate}</b>
+                    </p>
                   </div>
                   <button
                     type="button"

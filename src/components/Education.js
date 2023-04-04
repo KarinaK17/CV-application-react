@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import uniqid from "uniqid";
 import School from "./School";
 
-const section = {
-  backgroundColor: "grey",
-  borderBottom: "solid 2px black",
-};
-
 export class Education extends Component {
   constructor(props) {
     super();
@@ -19,7 +14,16 @@ export class Education extends Component {
         id: uniqid(),
         editMode: true,
       },
-      schools: [],
+      schools: [
+        {
+          name: "",
+          degree: "",
+          startDate: "",
+          endDate: "",
+          id: uniqid(),
+          editMode: true,
+        },
+      ],
     };
   }
 
@@ -90,7 +94,6 @@ export class Education extends Component {
     this.setState({
       schools: s,
     });
-    alert("change mode");
   };
 
   startEdit = (id) => {
@@ -104,7 +107,6 @@ export class Education extends Component {
     this.setState({
       schools: s,
     });
-    alert("change mode");
   };
 
   deleteSchool = (id) => {
@@ -131,8 +133,10 @@ export class Education extends Component {
   render() {
     return (
       <div className="Education">
-        <h3 style={section}>Education</h3>
-        <button onClick={this.addSchool}>Add</button>
+        <div className="section-header">
+          <h3>Education</h3>
+          <button onClick={this.addSchool}>Add</button>
+        </div>
         <School
           schools={this.state.schools}
           name={this.handleNameChange}
