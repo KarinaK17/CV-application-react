@@ -26,7 +26,7 @@ body {
 header,
 .section-header {
   color: white;
-  background-color: rgb(255 62 98);
+  background-color: rgb(25 35 74);
 }
 
 h1 {
@@ -60,7 +60,7 @@ h3 {
 li {
   width: min(90%, 450px);
   padding: 1%;
-  background-color: rgb(149, 221, 255);
+  background-color: rgb(209 218 255);
   border-radius: 10px;
 }
 
@@ -125,5 +125,5 @@ form div {
 }
 
 #edit-mode {
-  background-color: rgb(255 201 211);
+  background-color: rgb(255 203 234);
 }

@@ -1,12 +1,20 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import Job from "./Job";
 
-export class Experience extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      job: {
+function Experience() {
+  const [state, setState] = useState({
+    job: {
+      name: "",
+      position: "",
+      tasks: "",
+      startDate: "",
+      endDate: "",
+      id: uniqid(),
+      editMode: true,
+    },
+    jobs: [
+      {
         name: "",
         position: "",
         tasks: "",
@@ -15,125 +23,98 @@ export class Experience extends Component {
         id: uniqid(),
         editMode: true,
       },
-      jobs: [
-        {
-          name: "",
-          position: "",
-          tasks: "",
-          startDate: "",
-          endDate: "",
-          id: uniqid(),
-          editMode: true,
-        },
-      ],
-    };
-  }
+    ],
+  });
 
-  handleNameChange = (event, id) => {
-    let j = this.state.jobs.map((x) => {
+  const handleNameChange = (event, id) => {
+    let j = state.jobs.map((x) => {
       if (x.id === id) {
         return { ...x, name: event.target.value };
       } else {
         return x;
       }
     });
-    this.setState({
-      jobs: j,
-    });
+    setState({ ...state, jobs: j });
   };
 
-  handlePositionChange = (event, id) => {
-    let j = this.state.jobs.map((x) => {
+  const handlePositionChange = (event, id) => {
+    let j = state.jobs.map((x) => {
       if (x.id === id) {
         return { ...x, position: event.target.value };
       } else {
         return x;
       }
     });
-    this.setState({
-      jobs: j,
-    });
+    setState({ ...state, jobs: j });
   };
 
-  handleStartChange = (event, id) => {
-    let j = this.state.jobs.map((x) => {
+  const handleStartChange = (event, id) => {
+    let j = state.jobs.map((x) => {
       if (x.id === id) {
         return { ...x, startDate: event.target.value };
       } else {
         return x;
       }
     });
-    this.setState({
-      jobs: j,
-    });
+    setState({ ...state, jobs: j });
   };
 
-  handleEndChange = (event, id) => {
-    let j = this.state.jobs.map((x) => {
+  const handleEndChange = (event, id) => {
+    let j = state.jobs.map((x) => {
       if (x.id === id) {
         return { ...x, endDate: event.target.value };
       } else {
         return x;
       }
     });
-    this.setState({
-      jobs: j,
-    });
+    setState({ ...state, jobs: j });
   };
 
-  handleTasksChange = (event, id) => {
-    let j = this.state.jobs.map((x) => {
+  const handleTasksChange = (event, id) => {
+    let j = state.jobs.map((x) => {
       if (x.id === id) {
         return { ...x, tasks: event.target.value };
       } else {
         return x;
       }
     });
-    this.setState({
-      jobs: j,
-    });
+    setState({ ...state, jobs: j });
   };
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
   };
 
-  changeMode = (id) => {
-    let j = this.state.jobs.map((x) => {
+  const changeMode = (id) => {
+    let j = state.jobs.map((x) => {
       if (x.id === id) {
         return { ...x, editMode: false };
       } else {
         return x;
       }
     });
-    this.setState({
-      jobs: j,
-    });
+    setState({ ...state, jobs: j });
   };
 
-  startEdit = (id) => {
-    let j = this.state.jobs.map((x) => {
+  const startEdit = (id) => {
+    let j = state.jobs.map((x) => {
       if (x.id === id) {
         return { ...x, editMode: true };
       } else {
         return x;
       }
     });
-    this.setState({
-      jobs: j,
-    });
+    setState({ ...state, jobs: j });
   };
 
-  deleteJob = (id) => {
-    let j = this.state.jobs.filter((x) => x.id !== id);
-    this.setState({
-      jobs: j,
-    });
+  const deleteJob = (id) => {
+    let j = state.jobs.filter((x) => x.id !== id);
+    setState({ ...state, jobs: j });
   };
 
-  addJob = () => {
-    this.setState({
-      jobs: this.state.jobs.concat(this.state.job),
+  const addJob = () => {
+    setState({
+      jobs: state.jobs.concat(state.job),
       job: {
         name: "",
         position: "",
@@ -146,28 +127,26 @@ export class Experience extends Component {
     });
   };
 
-  render() {
-    return (
-      <div className="Experience">
-        <div className="section-header">
-          <h3>Experience</h3>
-          <button onClick={this.addJob}>Add</button>
-        </div>
-        <Job
-          jobs={this.state.jobs}
-          name={this.handleNameChange}
-          position={this.handlePositionChange}
-          tasks={this.handleTasksChange}
-          start={this.handleStartChange}
-          end={this.handleEndChange}
-          edit={this.startEdit}
-          changeMode={this.changeMode}
-          submit={this.handleSubmit}
-          delete={this.deleteJob}
-        />
+  return (
+    <div className="Experience">
+      <div className="section-header">
+        <h3>Experience</h3>
+        <button onClick={addJob}>Add</button>
       </div>
-    );
-  }
+      <Job
+        jobs={state.jobs}
+        name={handleNameChange}
+        position={handlePositionChange}
+        tasks={handleTasksChange}
+        start={handleStartChange}
+        end={handleEndChange}
+        edit={startEdit}
+        changeMode={changeMode}
+        submit={handleSubmit}
+        delete={deleteJob}
+      />
+    </div>
+  );
 }
 
 export default Experience;
